@@ -1,0 +1,81 @@
+v2024 = v1point1 on SNET
+
+v2125_1
+
+Fixed tab indices on UI.
+
+Made the surge period (or the second item in periods) the default selection.
+
+Inventory values default to 0 in custom inventory area.
+
+Rounding capacity and fill to integers now for FlatChartData that makes sense.
+
+Formatted SRC cells in FlatChartData to text to avoid sci notation.
+
+*Note: more than one policy not working right now-mostly bc of % change *
+
+Added 100% line, but this line won't change when chartdata is filtered.
+
+
+v2125_2
+
+Delete blank series and trendline from legend.
+
+Set overlap of blank series back to 100%.
+
+Only delete extra legend entries if they exist and only add a new blank series if
+necessary.
+
+added tables for bar charts.
+
+On original TADMUDI chart, had to set the series values and names specifically now since
+chart was looking funny with multiple periods.  Must have been caused by some red line
+logic.
+
+v2125_3
+
+Not adding a dummy row at the end of chartdata anymore.
+
+Fixed bar chart tables.
+
+When setting series values specifically, end(xldown) was returning blank rows.  Accounted
+for the case when there is only one record.
+
+Added bar charts.
+
+100% line is now green.
+
+v2125_4
+
+Always drawing 100% line now.
+
+Moved 100% series behind policy bars so that you can hover over bars for info.
+
+Changed Fonts to Arial and made bars 1 pt think on bar charts.
+
+v2125_5
+
+Limited chart production to 100 for now because that is max on my computer.
+
+v2125_6
+
+Fixed: When specifying your own inventory combo and adding it to the porfolio, the number of combos
+in the portfolio was not being updated.
+
+v2125_7
+Wrote a new sheetToRecords function which doesn't depend on m3 tables.
+For efficiency, now saving the peak demands to reuse.
+-Most changes in simpleinterface.preparePercentageData and CraigUtils
+-Added filterRecords to CraigUtils even though didn't use it...
+Kept HideWindow because it's still slightly faster than loading the window again.
+
+branched to SNET:
+v2125_81
+Imported 21-25 data
+
+branched here:
+v2125_91
+Deleted 20-24 data
+Imported base-testdata-v7 data
+Rounding policy ratio to 10ths place.
+Once complete, this version going to Github.
