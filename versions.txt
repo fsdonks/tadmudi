@@ -69,13 +69,47 @@ For efficiency, now saving the peak demands to reuse.
 -Added filterRecords to CraigUtils even though didn't use it...
 Kept HideWindow because it's still slightly faster than loading the window again.
 
-branched to SNET:
+On SNET only
+_____________________________
 v2125_81
 Imported 21-25 data
 
-branched here:
-v2125_91
-Deleted 20-24 data
-Imported base-testdata-v7 data
-Rounding policy ratio to 10ths place.
-Once complete, this version going to Github.
+v2125_82
+updated 20-24 capability groups to 21-25
+_____________________________
+
+v2125_9
+added text to arrow.
+
+For some reason 21-25 data on snet caused doubles instead of strings being sent to default0.
+This was even if both 21-25 and 20-24 cells were both formatted as text. Both Excel 2013.
+Windows 10 on NIPR though and Windows 7 on SNET. Both application.Version were 11.
+Fix: default0 should just check to see if the value isempty instead of a string.
+
+formatted data cells of capacity and fill columns to number with 0 decimal places.
+
+v2125_10
+needed to clear peaks wks before outputting new peaks. Change in getPercentage data
+
+When we were calling getPeakBetween, we were calling sortAny on a collection of strings.
+This sort would place "1901" before "27", so PostSurge fromTime was always < the first
+string in this sorted collection and the peak was initialized at 0 at the beginning of 
+the period when it should have been 1.  < does seem to work with strings and numbers.
+Change in getPeakBetween and something below.
+
+v2125_11
+Demands with 0 quantity were being created with a quantity of 1 per createDemand in
+TimeStep_EntityFactory.  Changed to use .quantity if quantity >= 0. Otherwise,
+throw an exception.
+
+VBA Round was rounding to nearest even number with .5.  Switched rounding on 
+combined capacity and fill to Application.WorksheetFunction.Round to reflect standard
+rounding expectations.
+Now, sparkcharts and TADMUDI match for the testdata and 2125 data on SNET.
+
+Added Excel 2013 requirement MsgBox to ThisWorkbook.
+
+v2125_12
+If a unit's supplyrecord has a different policy, need to use that. Name after policy
+in supplyrecords.  wait a minute, how do sparkchart results match tadmudi then?
+ohhh. sparkcharts aren't using supply policies either... verify.
